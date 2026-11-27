@@ -1,0 +1,28 @@
+<article class="pokemon-card">
+  <div class="card-heading">
+    <span class="pokemon-id">#{{ personaje().id.toString().padStart(3, '0') }}</span>
+    <span class="type">{{ personaje().types[0]?.type?.name }}</span>
+  </div>
+  @if (personaje().sprites.front_default) {
+    <img
+      class="pokemon-image"
+      [src]="personaje().sprites.front_default"
+      [alt]="'Imagen de ' + personaje().name"
+    />
+  }
+  <h2>{{ personaje().name }}</h2>
+  <p class="abilities">
+    Habilidad{{ personaje().abilities.length === 1 ? '' : 'es' }}:
+    {{ abilityNames() }}
+  </p>
+  <dl class="stats">
+    <div>
+      <dt>Altura</dt>
+      <dd>{{ (personaje().height / 10).toFixed(1) }} m</dd>
+    </div>
+    <div>
+      <dt>Peso</dt>
+      <dd>{{ (personaje().weight / 10).toFixed(1) }} kg</dd>
+    </div>
+  </dl>
+</article>
