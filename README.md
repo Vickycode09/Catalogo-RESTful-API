@@ -1,89 +1,63 @@
-# CatalogoApi
+# Catálogo PokéAPI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
+Aplicación Angular que muestra los primeros 20 Pokémon con sus imágenes y características.
 
-## API seleccionada: PokéAPI
+## API utilizada
 
-Se eligió [PokéAPI](https://pokeapi.co/) para construir un catálogo con los primeros 20 Pokémon.
-Antes de programar se inspeccionó en el navegador la respuesta JSON de
-[`/pokemon/pikachu`](https://pokeapi.co/api/v2/pokemon/pikachu). Es un objeto que incluye datos
-simples como `id`, `name`, `height` y `weight`, además de listas y objetos anidados para `types`,
-`abilities` y `sprites`.
+Se eligió [PokéAPI](https://pokeapi.co/). Antes de programar se inspeccionó en el navegador la
+respuesta JSON de [`/pokemon/pikachu`](https://pokeapi.co/api/v2/pokemon/pikachu). La respuesta
+individual contiene datos como `id`, `name`, `height` y `weight`, además de listas y objetos
+anidados como `types`, `abilities` y `sprites`.
 
-El endpoint de colección devuelve `count`, `next`, `previous` y `results`; cada resultado de la
-lista contiene `name` y `url`. La respuesta individual se consulta para mostrar los detalles.
+El endpoint de colección devuelve `count`, `next`, `previous` y `results`. Cada elemento de
+`results` incluye `name` y `url`.
 
-### Endpoints utilizados
+## Endpoints utilizados
 
-- `GET https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`: devuelve la primera página en
-  `results`; cada elemento contiene `name` y `url` para consultar sus detalles.
-- `GET https://pokeapi.co/api/v2/pokemon/{id-o-nombre}`: obtiene los detalles de cada Pokémon
-  (por ejemplo, `/pokemon/pikachu`).
+- `GET https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`: obtiene la primera página de
+  resultados.
+- `GET https://pokeapi.co/api/v2/pokemon/{id-o-nombre}`: obtiene los detalles de un Pokémon,
+  por ejemplo `https://pokeapi.co/api/v2/pokemon/pikachu`.
 
-### Campos mostrados
+## Campos mostrados
 
 - `id` y `name`: número y nombre.
 - `sprites.front_default`: imagen frontal.
 - `types[].type.name`: tipo principal.
 - `abilities[].ability.name`: habilidades.
-- `height` y `weight`: se convierten de decímetros a metros y de hectogramos a kilogramos,
-  respectivamente.
+- `height` y `weight`: convertidos de decímetros a metros y de hectogramos a kilogramos.
 
-  La aplicación separa la consulta en `ApiService`, el estado de carga/error y la lista en
-  `Lista`, y la presentación de cada Pokémon en `Tarjeta`.
+La aplicación separa las consultas en `ApiService`, los estados y resultados en `Lista`, y la
+presentación de cada Pokémon en `Tarjeta`.
 
-## Development server
+## Cómo ejecutar el proyecto
 
-To start a local development server, run:
+Desde la carpeta del proyecto, instala las dependencias y arranca el servidor:
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abre `http://localhost:4200/` en el navegador.
 
-## Code scaffolding
+## Capturas de pantalla
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Lista de Pokémon
 
-```bash
-ng generate component component-name
-```
+![Catálogo con la lista de Pokémon](docs/screenshots/pokemon-list.png)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Estado de carga
 
-```bash
-ng generate --help
-```
+![Mensaje mientras se cargan los Pokémon](docs/screenshots/loading.png)
 
-## Building
+### Estado de error
 
-To build the project run:
+![Mensaje cuando falla la conexión con la API](docs/screenshots/error.png)
+
+## Compilación y pruebas
 
 ```bash
-ng build
+npm run build
+npm test
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
