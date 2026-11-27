@@ -2,6 +2,36 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
 
+## API seleccionada: PokéAPI
+
+Se eligió [PokéAPI](https://pokeapi.co/) para construir un catálogo con los primeros 20 Pokémon.
+Antes de programar se inspeccionó en el navegador la respuesta JSON de
+[`/pokemon/pikachu`](https://pokeapi.co/api/v2/pokemon/pikachu). Es un objeto que incluye datos
+simples como `id`, `name`, `height` y `weight`, además de listas y objetos anidados para `types`,
+`abilities` y `sprites`.
+
+El endpoint de colección devuelve `count`, `next`, `previous` y `results`; cada resultado de la
+lista contiene `name` y `url`. La respuesta individual se consulta para mostrar los detalles.
+
+### Endpoints utilizados
+
+- `GET https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`: devuelve la primera página en
+  `results`; cada elemento contiene `name` y `url` para consultar sus detalles.
+- `GET https://pokeapi.co/api/v2/pokemon/{id-o-nombre}`: obtiene los detalles de cada Pokémon
+  (por ejemplo, `/pokemon/pikachu`).
+
+### Campos mostrados
+
+- `id` y `name`: número y nombre.
+- `sprites.front_default`: imagen frontal.
+- `types[].type.name`: tipo principal.
+- `abilities[].ability.name`: habilidades.
+- `height` y `weight`: se convierten de decímetros a metros y de hectogramos a kilogramos,
+  respectivamente.
+
+  La aplicación separa la consulta en `ApiService`, el estado de carga/error y la lista en
+  `Lista`, y la presentación de cada Pokémon en `Tarjeta`.
+
 ## Development server
 
 To start a local development server, run:
